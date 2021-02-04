@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>회원가입</title>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+	window.onload = function()
+	{
+		document.frm.name.focus();
+	}
+	
+	var fc = true;
+	var fd = true;
+	var fe = true;
+	
+	function pwcheck()
+	{
+           if(document.getElementById('password').value.length < 5 )
+           {
+           	alert('Min. 5 characters!!');
+           	$('#password').focus();
+           	fc = false;
+          		
+           }
+           else
+           {
+           	fc= true;
+           }
+	}
+	       
+	function emailcheck()	
+ 	{	
+ 		var sc = ["@","."];
+		var check_sc= 0;
+           
+			for(var i=0;i<sc.length;i++)
+            {
+           	 	if(document.getElementById('email').value.indexOf(sc[i]) != -1)
+             	{
+             		check_sc = 1;
+            	}
+            }
+          
+           if(check_sc == 0 )
+           {
+           	alert('올바른 이메일 형식이 아닙니다.');
+           	$('#email').focus();
+           	fd = false;
+           	
+           }
+           else
+           {
+           	fd = true;
+           }
+	}                     
+  
+	function Dosubmit()
+	{	
+		var name     = document.getElementById('name').value;
+ 		var email     = document.getElementById('email').value;		
+		var password  = document.getElementById('password').value;
+
+		
+		if( $("#name").val() == "" || $("#email").val() == "" || $("#password").val() == "" )
+		{
+			alert('입력하지 않은 항목이 있습니다');		
+				
+		}
+		else
+		{
+			
+			if(fc==true&&fd==true)
+			{
+				document.frm.submit();
+			}							
+			else
+			{				
+				alert('입력이 올바르지 않습니다.'); 		
+			}
+		}		
+	}
+	
+	
+</script>
+</head>
+<body>
+	<form id='frm' name='frm' method='post' action='#'>
+		<table style="margin:auto;text-align:center; " >
+			<tr>
+				<td>
+					<table style="margin:auto; text-align:left;">
+						<tr>
+							<td><h1>Create an account</h1></td>
+						</tr>
+						<tr>
+							<td><h3>Full Name</h3></td>
+						</tr>
+						<tr>
+							<td><input type="text" id='name' name='name' placeholder="ex.John Doe" style="width:400px; height:40px;"></td>
+						</tr>
+						<tr>
+							<td><h3>Email Address</h3></td>
+						</tr>
+						<tr>
+							<td><input type="email" id='email' name='email' placeholder="ex.Johndoe@gmail.com" style="width:400px; height:40px;" onblur="emailcheck()"></td>
+						</tr>
+						<tr>
+							<td><h3>Password</h3></td>
+						</tr>
+						<tr>
+							<td><input type="password" id='password' name='password' placeholder="Min. 5characters" style="width:400px; height:40px; margin-bottom:10px;" onblur="pwcheck()"></td>
+						</tr>	
+						<tr>
+							<td>By clicking "Create your account" below, you agree to<br>out terms of service and privacy policy</td>
+						</tr>
+						<tr>
+							<td><input type='button' value='Create your account' style="width:400px; height:40px; margin-top:10px" onclick='Dosubmit()'></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
